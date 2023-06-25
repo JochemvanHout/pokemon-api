@@ -1,5 +1,5 @@
-import './App.css'
-import PokemonList from './components/PokemonList'
+import './App.scss'
+import PokemonCard from './components/PokemonCard'
 
 const fetchData = async () => {
   const response = await fetch("https://pokeapi.co/api/v2/pokemon");
@@ -8,16 +8,11 @@ const fetchData = async () => {
 
 const data = await fetchData();
 
-const fetchSingularPokemon = async (infoUrl) => {
-  const response = await fetch(infoUrl);
-  return response.json();
-}
-
 function App() {
   
-  const pokemon = data.results.map(pokemon => 
-    <PokemonList name={pokemon.name}
-                 pokemonData={fetchSingularPokemon(pokemon.url)}/>
+  const pokemon = data.results.map((pokemon: any) => 
+    <PokemonCard name={pokemon.name}
+                 pokemonUrl={pokemon.url}/>
     )
   return (
     pokemon
